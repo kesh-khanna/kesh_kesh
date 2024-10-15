@@ -94,7 +94,7 @@ header {
 	border-radius: 5px;
 	position: relative;
 	/* background-color: var(--gradientBottom); */
-	background-color: rgba(121, 141, 157, 0.9);
+	background-color: rgba(121, 141, 157, 1);
 }
 
 header span {
@@ -218,7 +218,6 @@ pre {
 	overflow-x: auto;
 }
 
-
 a:hover,
 a:focus {
 	font-style: italic;
@@ -229,7 +228,7 @@ a:visited {
 }
 
 .imgtxt {
-	width: 400px;
+	width: 300px;
 	height: auto;
 	display: inline-block;
 	position: relative;
