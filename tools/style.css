@@ -9,29 +9,9 @@
 		--gradientTop: white;
 		--gradientBottom: rgb(240, 248, 255, .8);
 	}
+
 }
 
-
-/* start dark mode styling */
-/* TODO: add a button that switches the background color from dark to light */
-/* :root {
-		--text: white;
-		--border: #5a7678;
-		--accent: #74C365;
-		--bg: rgb(0,60,60,.8);
-		--gradientBottom: rgb(0, 50, 60);
-		--gradientTop: darkslategrey;
-		a:link { color: lightblue; }
-	}
-	header {
-		/* background: url('bg/berri_tree.png'); */
-/* background-image: url("bg/flower_background.png");  
-
-		background-size: 10%;
-		background-repeat: repeat;
-	} */
-
-/* end dark mode styling */
 
 @font-face {
 	font-family: "DOS";
@@ -43,49 +23,72 @@
 }
 
 body {
-	padding: 15px;
+	padding: 10px;
 	font-family: "DOS", "Courier New", Courier, monospace;
 	font-smooth: never;
 	-webkit-font-smoothing: none;
 	-moz-font-smoothing: greyscale;
-	text-align: center;
 	color: var(--text);
 
 	/* page background pattern */
 	/* background-image: url("bg/flower_background.png"); */
-	background: url('images/hike_japan.png');
-	background-position: 55% 25%;
-	background-repeat: repeat;
+	background: url('images/lisbon.png');
+	background-size: 50%;
 }
 
 p {
 	padding: 0 0 10px 0;
+	text-align: center;
 }
 
 .container {
 	max-width: 55rem;
+	margin: 2vw auto 12px auto;
 	/* border: 6px ridge var(--border); */
-	outline-offset: 4px;
 	display: flex;
 	flex-wrap: wrap;
-	margin: 0 auto;
-	padding: 100px;
+	padding: 6px;
 	gap: 5px;
+	/* container background pattern */
 }
+
+/* these control the column widths */
+.small {
+	flex: 1 1 5%;
+}
+
+.large {
+	flex: 1 1 82%;
+}
+
+.full {
+	flex: 1 1 100%;
+	text-align: center;
+	padding: 5px;
+}
+
+.half {
+	flex: 1 1 40%;
+	text-align: center;
+}
+
 
 header {
 	background-size: cover;
 	background-position: 50% 40%;
 	width: 100%;
-	height: 100px;
+	height: 75px;
+	/* change banner height here*/
+	border: 2px ridge var(--border);
 	border-radius: 5px;
 	position: relative;
-	background-color: rgba(66, 136, 68, 0.9);
+	/* background-color: var(--gradientBottom); */
+	background-color: rgba(237,213,175,0.9);
 }
 
 header span {
-	font-size: 5rem;
-	position: center;
+	font-size: 2.5rem;
+	position: absolute;
 	bottom: 0;
 	right: 10px;
 	margin: 10px;
@@ -98,20 +101,23 @@ header span {
 }
 
 nav {
+	/* height: 100%; */
+	border: 2px ridge var(--border);
+	border-radius: 5px;
 	padding: 5px;
-	position: center;
+	background: linear-gradient(var(--gradientTop), var(--gradientBottom));
+	/* background-color: rgba(121,141,157,0.9); */
 }
 
 nav div {
 	text-align: center;
 	font-size: 1.25rem;
-	margin: 5px 5px 10px 5px;
 }
 
 nav a {
 	display: block;
-	position: center;
-	background: none;
+	margin: 5px;
+	background: linear-gradient(to left, rgba(237,213,175,0.9), var(--gradientBottom));
 	border-radius: 5px;
 	padding: 2px 7px;
 	text-decoration: none;
@@ -122,10 +128,37 @@ nav a:visited {
 	color: var(--text);
 }
 
-/* hover effects */
-/* nav a:hover, nav a:focus {
-	background: linear-gradient(to right,var(--bg), var(--gradientBottom), var(--gradientTop));
-} */
+nav a:hover,
+nav a:focus {
+	background: linear-gradient(to right, rgba(237,213,175,0.9), var(--gradientBottom), var(--gradientTop));
+}
+
+/* optional button styling like in the preview */
+div.small>img {
+	display: block;
+	margin: 5px auto;
+	border: 2px ridge var(--border);
+	border-radius: 5px;
+}
+
+
+section {
+	border: 2px ridge var(--border);
+	border-radius: 5px;
+	background: linear-gradient(var(--gradientTop), var(--gradientBottom));
+	padding: 5px;
+}
+
+
+footer {
+	text-align: center;
+	margin-bottom: 5vw;
+	font-size: 0.8rem;
+}
+
+footer a {
+	text-decoration: none;
+}
 
 
 h1,
@@ -140,22 +173,24 @@ p {
 }
 
 h1 {
-	font-size: 1.4rem;
+	font-size: 1.6rem;
 	letter-spacing: 2px;
-	font-weight: normal;
 	text-align: center;
 	border-bottom: 2px ridge var(--border);
 	padding-bottom: 5px;
 }
 
-h2 {
+h3 {
 	font-size: 1.25rem;
 	font-weight: normal;
 	text-align: center;
 }
 
-h3 {
-	font-size: 1.1rem;
+h2 {
+	font-size: 1.2rem;
+	text-align: center;
+	font-weight: normal;
+	color: var(--accent);
 }
 
 h4 {
@@ -164,9 +199,29 @@ h4 {
 	padding-left: 12px;
 }
 
+/* prevents overflow on smaller screens */
+img {
+	max-width: 100%;
+}
+
+pre {
+	overflow-x: auto;
+}
+
+
+
+a:hover,
+a:focus {
+	font-style: italic;
+}
+
+a:visited {
+	color: var(--accent);
+}
+
 .imgtxt {
-	width: fit-content;
-	height: fit-content;
+	width: 400px;
+	height: auto;
 	display: inline-block;
 	position: relative;
 }
@@ -190,51 +245,5 @@ h4 {
 
 .imgtxt:hover img,
 .imgtxt:focus img {
-	rotate: 10deg;
-}
-
-/* prevents overflow on smaller screens */
-img {
-	max-width: 100%;
-}
-
-pre {
-	overflow-x: auto;
-}
-
-.button {
-	background-color: #63b55fee;
-	border: none;
-	color: white;
-	padding: 20px 34px;
-	text-align: center;
-	text-decoration: none;
-	border-radius: 10px;
-	display: inline-block;
-	font-size: 20px;
-	margin: 4px 2px;
-	cursor: pointer;
-}
-
-.back {
-	background-color: #63b55fee;
-	border: none;
-	color: white;
-	padding: 20px 34px;
-	text-align: center;
-	text-decoration: solid;
-	display: inline-block;
-	border-radius: 10px;
-	font-size: 20px;
-	margin: 4px 2px;
-	cursor: pointer;
-}
-
-a:hover,
-a:focus {
-	font-style: italic;
-}
-
-a:visited {
-	color: var(--accent);
+	rotate: -8deg;
 }

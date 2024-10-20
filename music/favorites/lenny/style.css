@@ -53,9 +53,11 @@ body {
 
 	/* page background pattern */
 	/* background-image: url("bg/flower_background.png"); */
-	background: url('images/hike_japan.png');
-	background-position: 55% 25%;
-	background-repeat: repeat;
+	background: url('images/texas_flood.jpg');
+	background-repeat: no-repeat;	
+	background-attachment: fixed;
+	background-position: 50% 0%;
+	background-color: rgba(203,185,171,0.9);
 }
 
 p {

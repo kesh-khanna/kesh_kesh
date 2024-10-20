@@ -10,7 +10,7 @@
 			--gradientBottom: rgb(240, 248, 255, .8);
 		}
 		header {
-			background-image: url("images/lisbon_flower.png");
+			background-image: url("images/mosaic.png");
 		}
 	}
 
@@ -161,7 +161,12 @@ footer {
 	text-align: center;
 	margin-bottom: 5vw;
 	font-size: 0.8rem;
+	background-color: rgba(240, 248, 255, .8);
+	width: fit-content;
+	margin: auto;
+	border-radius: 5px;
 }
+
 footer a { 
 	text-decoration: none;
 }
@@ -171,6 +176,7 @@ h1, h2, h3, h4, h5, h6, p  {
 	margin: 5px;
 	line-height: 1.2;
 }
+
 h1 { 
 	font-size: 1.4rem;
 	letter-spacing: 2px;
