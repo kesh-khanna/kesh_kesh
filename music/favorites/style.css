@@ -1,37 +1,12 @@
-/* start light mode styling */
-/* set the default color scheme */
-@media (prefers-color-scheme: light) {
-	:root {
-		--text: darkslategrey;
-		--border: lightgrey;
-		--accent: rgb(0, 109, 128);
-		--bg: #dce3e1;
-		--gradientTop: white;
-		--gradientBottom: rgb(240, 248, 255, .8);
-	}
+
+:root {
+	--text: darkslategrey;
+	--border: lightgrey;
+	--accent: rgb(0, 109, 128);
+	--bg: #dce3e1;
+	--gradientTop: white;
+	--gradientBottom: rgb(240, 248, 255, .8);
 }
-
-
-/* start dark mode styling */
-/* TODO: add a button that switches the background color from dark to light */
-/* :root {
-		--text: white;
-		--border: #5a7678;
-		--accent: #74C365;
-		--bg: rgb(0,60,60,.8);
-		--gradientBottom: rgb(0, 50, 60);
-		--gradientTop: darkslategrey;
-		a:link { color: lightblue; }
-	}
-	header {
-		/* background: url('bg/berri_tree.png'); */
-/* background-image: url("bg/flower_background.png");  
-
-		background-size: 10%;
-		background-repeat: repeat;
-	} */
-
-/* end dark mode styling */
 
 @font-face {
 	font-family: "DOS";
@@ -41,6 +16,11 @@
 * {
 	box-sizing: border-box;
 }
+/* these control the column widths */
+.small { flex: 1 1 9%; }
+.large { flex: 1 1 82%; }
+.full { flex: 1 1 100%; }
+.half { flex: 1 1 49%; }
 
 body {
 	padding: 15px;
@@ -53,9 +33,15 @@ body {
 
 	/* page background pattern */
 	/* background-image: url("bg/flower_background.png"); */
-	background: url('images/hike_japan.png');
-	background-position: 55% 25%;
-	background-repeat: repeat;
+	/* background-color: rgba(203,185,171,0.9); */
+	background: linear-gradient(180deg,
+	rgba(203,185,171,1)17%, 
+	rgb(47, 106, 158) 33%, 
+	rgba(175,176,206,1) 50%, 
+	rgba(208,209,207,1) 67%,
+	rgba(253,250,217,1) 84%,
+	rgb(244, 252, 142) 100%
+	);
 }
 
 p {
@@ -73,21 +59,25 @@ p {
 	gap: 5px;
 }
 
+.container div {
+	margin: auto;
+	display: block;
+	padding: 15px;
+}
+
 header {
 	background-size: cover;
 	background-position: 50% 40%;
 	width: 100%;
-	height: 75px;
-	/* change banner height here*/
+	height: 100px;
 	border-radius: 5px;
 	position: relative;
-	/* background-color: var(--gradientBottom); */
-	background-color: rgba(66, 136, 68, 0.95);
+	background-color: rgba(66, 136, 68, 0.9);
 }
 
 header span {
-	font-size: 2.5rem;
-	position: absolute;
+	font-size: 5rem;
+	position: center;
 	bottom: 0;
 	right: 10px;
 	margin: 10px;
@@ -101,18 +91,22 @@ header span {
 
 nav {
 	padding: 5px;
-	position: center;
+	position: top left;
+	width: 10vh;
+	background-color: rgba(250, 235, 215, 0.5);
+	border-radius: 5px;
 }
 
 nav div {
 	text-align: center;
+	position: top left;
 	font-size: 1.25rem;
 	margin: 5px 5px 10px 5px;
 }
 
 nav a {
 	display: block;
-	position: center;
+	position: top left;
 	background: none;
 	border-radius: 5px;
 	padding: 2px 7px;
@@ -129,7 +123,34 @@ nav a:visited {
 	background: linear-gradient(to right,var(--bg), var(--gradientBottom), var(--gradientTop));
 } */
 
+div > .record {
+	scale: 0.8; opacity: 0;
+	margin: auto;
+	display: block;
+	width: 400px;
+	height: 400px;
+	text-align: center;
+	animation: fade-in linear forwards;
+	animation-timeline: view();
+	animation-range: 250px 500px;
+}
 
+@keyframes fade-in {
+	to {scale: 1; opacity: 1;}
+}
+
+@keyframes fade-out {
+	to {scale: 0.8; opacity: 0;}
+}
+
+.record:hover img,
+.record:focus img {
+	scale: 1.05;
+	rotate: 1deg;
+}
+footer {
+	font-size: 0.85rem;
+}
 h1,
 h2,
 h3,
