@@ -1,15 +1,12 @@
 /* start light mode styling */
 /* set the default color scheme */
-@media (prefers-color-scheme: light) {
-	:root {
-		--text: darkslategrey;
-		--border: lightgrey;
-		--accent: rgb(0, 109, 128);
-		--bg: #dce3e1;
-		--gradientTop: white;
-		--gradientBottom: rgb(240, 248, 255, .8);
-	}
-
+:root {
+	--text: darkslategrey;
+	--border: lightgrey;
+	--accent: rgb(0, 109, 128);
+	--bg: #dce3e1;
+	--gradientTop: white;
+	--gradientBottom: rgb(240, 248, 255, .8);
 }
 
 
