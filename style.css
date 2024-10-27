@@ -75,12 +75,6 @@ p{
 
 	/* container background pattern */
 	background-color: var(--gradientBottom);
-
-	/* make the container background optionally wood grain */
-	/* background-image: repeating-radial-gradient(circle at 0 0, transparent 0, #d2b48c 7px), repeating-linear-gradient(var(--bg), var(--bg)); */
-	/* background-image: url(images/American-White-Ash.png);
-	background-size: 50%; */
-
 }
 /* these control the column widths */
 .small { flex: 1 1 9%; }
