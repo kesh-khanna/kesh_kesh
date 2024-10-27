@@ -34,7 +34,7 @@ body {
 	background-repeat: no-repeat;	
 	background-attachment: fixed;
 	background-position: 50% 0%;
-	background-color: rgb(47, 106, 158);
+	background-color: black
 }
 p {
 	padding: 0 0 10px 0;
@@ -71,7 +71,7 @@ header {
 }
 
 header span {
-	font-size: 5rem;
+	font-size: calc(2vw + 2vh);
 	position: absolute;
 	margin: auto;
 	bottom: 0;
