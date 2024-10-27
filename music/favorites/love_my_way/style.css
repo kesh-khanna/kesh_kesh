@@ -1,15 +1,15 @@
 /* start light mode styling */
 /* set the default color scheme */
-
-:root {
+@media (prefers-color-scheme: light) {
+	:root {
 		--text: darkslategrey;
 		--border: lightgrey;
 		--accent: rgb(0, 109, 128);
 		--bg: #dce3e1;
 		--gradientTop: white;
 		--gradientBottom: rgb(240, 248, 255, .8);
+	}
 }
-
 
 
 /* start dark mode styling */
@@ -53,13 +53,11 @@ body {
 
 	/* page background pattern */
 	/* background-image: url("bg/flower_background.png"); */
-	background-color: rgba(203,185,171,0.9);
-
-	background-image: url('images/in_step.png');
+	background: url('images/texas_flood.jpg');
 	background-repeat: no-repeat;	
 	background-attachment: fixed;
-	background-size: 30%;
-	background-position: 0% 50%
+	background-position: 50% 0%;
+	background-color: rgba(203,185,171,0.9);
 }
 
 p {
@@ -204,6 +202,34 @@ img {
 
 pre {
 	overflow-x: auto;
+}
+
+.button {
+	background-color: #63b55fee;
+	border: none;
+	color: white;
+	padding: 20px 34px;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 10px;
+	display: inline-block;
+	font-size: 20px;
+	margin: 4px 2px;
+	cursor: pointer;
+}
+
+.back {
+	background-color: #63b55fee;
+	border: none;
+	color: white;
+	padding: 20px 34px;
+	text-align: center;
+	text-decoration: solid;
+	display: inline-block;
+	border-radius: 10px;
+	font-size: 20px;
+	margin: 4px 2px;
+	cursor: pointer;
 }
 
 a:hover,
