@@ -1,5 +1,4 @@
-/* start light mode styling */
-/* set the default color scheme */
+
 :root {
 	--text: darkslategrey;
 	--border: lightgrey;
@@ -9,29 +8,6 @@
 	--gradientBottom: rgb(240, 248, 255, .8);
 }
 
-
-
-/* start dark mode styling */
-/* TODO: add a button that switches the background color from dark to light */
-/* :root {
-		--text: white;
-		--border: #5a7678;
-		--accent: #74C365;
-		--bg: rgb(0,60,60,.8);
-		--gradientBottom: rgb(0, 50, 60);
-		--gradientTop: darkslategrey;
-		a:link { color: lightblue; }
-	}
-	header {
-		/* background: url('bg/berri_tree.png'); */
-/* background-image: url("bg/flower_background.png");  
-
-		background-size: 10%;
-		background-repeat: repeat;
-	} */
-
-/* end dark mode styling */
-
 @font-face {
 	font-family: "DOS";
 	src: url('fonts\Px437_DOS-V_re_ANK24.ttf') format('truetype');
@@ -40,6 +16,11 @@
 * {
 	box-sizing: border-box;
 }
+/* these control the column widths */
+.small { flex: 1 1 9%; }
+.large { flex: 1 1 82%; }
+.full { flex: 1 1 100%; }
+.half { flex: 1 1 49%; }
 
 body {
 	padding: 15px;
@@ -51,10 +32,10 @@ body {
 	color: var(--text);
 
 	/* page background pattern */
-	/* background-image: url("bg/flower_background.png"); */
-	background: url('images/hike_japan.png');
-	background-position: 55% 25%;
+	background-image: url("images/louisiana_dock.png");
+	background-size: 100%;
 	background-repeat: repeat;
+	background-position: 50% 30%;
 }
 
 p {
@@ -65,26 +46,28 @@ p {
 	max-width: 55rem;
 	/* border: 6px ridge var(--border); */
 	outline-offset: 4px;
+	margin: 5vw auto 12px auto;
 	display: flex;
 	flex-wrap: wrap;
-	margin: 0 auto;
-	padding: 100px;
+	padding: 5px;
 	gap: 5px;
+	border-radius: 10px;
+
+	background-color: var(--gradientBottom);
 }
+
 
 header {
 	background-size: cover;
 	background-position: 50% 40%;
 	width: 100%;
 	height: 75px;
-	/* change banner height here*/
 	border-radius: 5px;
-	position: relative;
-	/* change banner height here*/
 	border: 2px ridge var(--border);
+	position: relative;
 	border-radius: 5px;
 	/* background-color: var(--gradientBottom); */
-	background-color: rgba(66, 136, 68, 1);
+	background-color: rgba(121,184,188,1);
 }
 
 header span {
@@ -101,9 +84,18 @@ header span {
 	color: var(--gradientTop);
 }
 
+section {
+	border: 2px ridge var(--border);
+	border-radius: 5px;
+	background: linear-gradient(var(--gradientTop),var(--gradientBottom));
+	padding: 5px;
+}
+
 nav {
 	padding: 5px;
-	position: center;
+	border: 2px ridge var(--border);
+	border-radius: 5px;
+	background: linear-gradient(var(--gradientTop),var(--gradientBottom));
 }
 
 nav div {
@@ -114,11 +106,11 @@ nav div {
 
 nav a {
 	display: block;
-	position: center;
-	background: none;
 	border-radius: 5px;
 	padding: 2px 7px;
+	background: linear-gradient(to right,var(--bg),var(--gradientBottom));
 	text-decoration: none;
+	margin: 5px;
 }
 
 nav a:link,
@@ -127,11 +119,14 @@ nav a:visited {
 }
 
 /* hover effects */
-/* nav a:hover, nav a:focus {
+nav a:hover, nav a:focus {
 	background: linear-gradient(to right,var(--bg), var(--gradientBottom), var(--gradientTop));
-} */
+}
 
 
+footer {
+	font-size: 0.85rem;
+}
 h1,
 h2,
 h3,
@@ -168,34 +163,6 @@ h4 {
 	padding-left: 12px;
 }
 
-.imgtxt {
-	width: fit-content;
-	height: fit-content;
-	display: inline-block;
-	position: relative;
-}
-
-.imgtxt span {
-	opacity: 0;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	z-index: 99;
-	font-size: 2.5rem;
-	color: #FFF;
-	filter: drop-shadow(1px 1px 0 black) drop-shadow(-1px 1px 0 black) drop-shadow(1px -1px 0 black) drop-shadow(-1px -1px 0 black);
-}
-
-.imgtxt:hover span,
-.imgtxt:focus span {
-	opacity: 1;
-}
-
-.imgtxt:hover img,
-.imgtxt:focus img {
-	rotate: 10deg;
-}
 
 /* prevents overflow on smaller screens */
 img {
@@ -204,21 +171,6 @@ img {
 
 pre {
 	overflow-x: auto;
-}
-
-.button {
-	background-color: #63b55fee;
-	border: none;
-	color: white;
-	padding: 20px 34px;
-	text-align: center;
-	text-decoration: none;
-	border-radius: 10px;
-	border: 2px ridge var(--border);
-	display: inline-block;
-	font-size: 20px;
-	margin: 4px 2px;
-	cursor: pointer;
 }
 
 
@@ -230,3 +182,4 @@ a:focus {
 a:visited {
 	color: var(--accent);
 }
+
