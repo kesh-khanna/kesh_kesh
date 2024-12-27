@@ -125,8 +125,6 @@ nav a {
 	border-radius: 5px;
 	padding: 2px 7px;
 	text-decoration: none;
-	font-size: 2.5rem;
-
 }
 nav a:link, nav a:visited { 
 	color: var(--text);
