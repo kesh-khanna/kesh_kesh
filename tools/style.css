@@ -137,7 +137,7 @@ section {
 	border: 2px ridge var(--border);
 	border-radius: 5px;
 	background: linear-gradient(var(--gradientTop), var(--gradientBottom));
-	padding: 5px;
+	padding: 10px;
 }
 
 
@@ -161,14 +161,15 @@ h6,
 p {
 	margin: 5px;
 	line-height: 1.2;
+	padding: 2px;
 }
 
 h1 {
 	font-size: 1.7rem;
 	letter-spacing: 2px;
 	text-align: center;
-	border-bottom: 2px ridge var(--border);
-	padding-bottom: 5px;
+	border-bottom: 1px ridge var(--border);
+	padding-bottom: 10px;
 }
 
 
