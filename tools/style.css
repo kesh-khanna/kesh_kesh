@@ -1,15 +1,13 @@
 /* start light mode styling */
 /* set the default color scheme */
-@media (prefers-color-scheme: light) {
-	:root {
-		--text: darkslategrey;
-		--border: lightgrey;
-		--accent: rgb(0, 109, 128);
-		--bg: #dce3e1;
-		--gradientTop: white;
-		--gradientBottom: rgb(240, 248, 255, .8);
-	}
 
+:root {
+	--text: darkslategrey;
+	--border: lightgrey;
+	--accent: rgb(0, 109, 128);
+	--bg: #dce3e1;
+	--gradientTop: white;
+	--gradientBottom: rgb(240, 248, 255, .8);
 }
 
 
@@ -33,7 +31,7 @@ body {
 	/* page background pattern */
 	/* background-image: url("bg/flower_background.png"); */
 	background: url('images/lisbon.png');
-	background-size: 50%;
+	background-size: 60%;
 }
 
 p {
@@ -50,6 +48,7 @@ p {
 	padding: 6px;
 	gap: 5px;
 	/* container background pattern */
+	background-color: var(--gradientBottom);
 }
 
 /* these control the column widths */
@@ -133,14 +132,6 @@ nav a:focus {
 	background: linear-gradient(to right, rgba(237,213,175,0.9), var(--gradientBottom), var(--gradientTop));
 }
 
-/* optional button styling like in the preview */
-div.small>img {
-	display: block;
-	margin: 5px auto;
-	border: 2px ridge var(--border);
-	border-radius: 5px;
-}
-
 
 section {
 	border: 2px ridge var(--border);
@@ -173,21 +164,16 @@ p {
 }
 
 h1 {
-	font-size: 1.6rem;
+	font-size: 1.7rem;
 	letter-spacing: 2px;
 	text-align: center;
 	border-bottom: 2px ridge var(--border);
 	padding-bottom: 5px;
 }
 
-h3 {
-	font-size: 1.25rem;
-	font-weight: normal;
-	text-align: center;
-}
 
 h2 {
-	font-size: 1.2rem;
+	font-size: 1.3rem;
 	text-align: center;
 	font-weight: normal;
 	color: var(--accent);
