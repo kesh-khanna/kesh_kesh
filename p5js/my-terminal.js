@@ -11,7 +11,7 @@ const directories = {
         '<white>p5js_projects</white>',
         [
             ['snow_day',
-                'test/index.html',
+                'snow_day/index.html',
                 'audio reactive visualizer that i made for a little guitar jam. 11/12/25',
                 'images/dithered-image.png'
             ],
@@ -49,7 +49,8 @@ const commandDescriptions = {
     ls: 'list directory contents',
     open: 'open a project (e.g., open snow_day)',
     credits: 'show credits and libraries used',
-    clear: 'clear the terminal screen'
+    clear: 'clear the terminal screen',
+    pwd: 'prints the current working directory'
 };
 
 const commands = {
@@ -76,6 +77,10 @@ const commands = {
     },
     echo(...args) {
         term.echo(args.join(' '));
+    },
+
+    pwd() {
+        this.echo(cwd);
     },
 
     cd(dir = null) {
