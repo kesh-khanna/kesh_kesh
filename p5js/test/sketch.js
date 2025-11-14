@@ -7,7 +7,8 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(400, 400);
+  let canvas = createCanvas(400, 400);
+  canvas.parent('canvas-container'); // Put canvas in the container
   background(220);
   textAlign(CENTER, CENTER);
   textSize(20);

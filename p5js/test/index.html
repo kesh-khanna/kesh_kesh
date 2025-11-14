@@ -12,20 +12,44 @@
     <script src="../libraries/p5.sound.min.js"></script>
   </head>
 
- <style>
-  body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    background-color: rgb(12, 106, 150);
-  }
-  
-</style>
-  <body>
-    <script src="sketch.js"></script>
-  </body>
+  <style>
+    :root {
+      --border: #333;
+      --gradientBottom: #f0f0f0;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      max-width: 55rem;
+      margin: 5vw auto 12px auto;
+      /* border: 6px ridge var(--border); */
+      outline-offset: 4px;
+      border-radius: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 5px;
+      gap: 5px;
+      background-color: var(--gradientBottom);
+    }
+  </style>
+</head>
+<body>
+  <div>
+		<nav>
+			<a href="../">back to code art</a>
+			<a href="../../">back to home</a>
+		</nav>
+	</div>
+
+
+  <div class="container" id="canvas-container"></div>
+  <script src="sketch.js"></script>
+</body>
 </html>
