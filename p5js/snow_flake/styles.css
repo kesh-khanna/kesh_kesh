@@ -1,0 +1,16 @@
+#ui {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: white;
+  font-family: sans-serif;
+}
+
+input[type=range] {
+  cursor: pointer;
+}

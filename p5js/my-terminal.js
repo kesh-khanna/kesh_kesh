@@ -18,11 +18,16 @@ const directories = {
             ['pixel_sorting',
                 'sorting/index.html',
                 'under construction. the goal is to make something that sorts the pixels in an image and animates the sorting process in some way'
-            ]
+            ],
+            ['snow_flakes',
+                'snow_flake/index.html',
+                'another attempt at an audio reactive visualizer. this time with three.js. 11/15/25',
+                'images/snow_flake_dither.png'
+            ],
         ].map(([name, url, description = '', image = null]) => {
             const projectLine = `* <a href="${url}">${name}</a> &mdash; <white>${description}</white>`;
             const imageLine = image 
-                ? `  <div style="text-align: center; margin-top: 5px; margin-bottom: 10px;"><a href="${url}" style="display: inline-block;"><img src="${image}" style="width: 200px; height: auto;"></a></div>` 
+                ? `  <div style="text-align: center; margin-top: 5px; margin-bottom: 10px;"><a href="${url}" style="display: inline-block;"><img src="${image}" style="width: 300px; height: auto;"></a></div>` 
                 : '';
             return imageLine ? `${projectLine}\n${imageLine}` : projectLine;
         }),
@@ -110,11 +115,11 @@ const commands = {
                     this.error('Invalid directory');
                 } else {
                     const dir = dirs[0];
-                    this.echo(directories[dir].join('\n'), { raw: true });
+                    this.echo(directories[dir].join('<br><br>'), { raw: true });
                 }
             } else if (cwd === root) {
                 if (dir in directories) {
-                    this.echo(directories[dir].join('\n'), { raw: true });
+                    this.echo(directories[dir].join('<br><br>'), { raw: true });
                 } else {
                     this.error('Invalid directory');
                 }
@@ -127,7 +132,7 @@ const commands = {
             print_home();
         } else {
             const dir = cwd.substring(2);
-            this.echo(directories[dir].join('\n'), { raw: true });
+            this.echo(directories[dir].join('<br><br>'), { raw: true });
         }
     }, 
 

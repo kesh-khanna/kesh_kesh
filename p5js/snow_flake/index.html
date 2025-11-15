@@ -1,0 +1,103 @@
+<div id="app"></div>
+
+<!-- Import Map -->
+<script type="importmap">
+    {
+    "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.164/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164/examples/jsm/"
+    }
+    }
+</script>
+
+<style>
+  #ui {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 14px 18px;
+    background: rgba(20, 30, 50, 0.35);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(180, 220, 255, 0.25);
+    border-radius: 10px;
+    color: #d8ecff;
+    font-family: 'Inter', sans-serif;
+    z-index: 10;
+    box-shadow: 0 0 12px rgba(170, 210, 255, 0.2);
+  }
+
+  #ui label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    color: #e8f6ff;
+  }
+
+  #flakeCount {
+    width: 180px;
+    height: 6px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #6bbdfd, #9ed7ff);
+    outline: none;
+    transition: 0.25s;
+    box-shadow: 0 0 6px rgba(100, 160, 255, 0.4);
+  }
+
+  #flakeCount:hover {
+    box-shadow: 0 0 10px rgba(130, 190, 255, 0.6);
+  }
+
+  #flakeCount::-webkit-slider-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #e8f8ff 20%, #b6d6ff 70%);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow:
+      0 0 6px rgba(170, 210, 255, 0.9),
+      0 0 12px rgba(120, 180, 255, 0.5);
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+
+  #flakeValue {
+    margin-left: 10px;
+    font-size: 15px;
+    color: #d8ecff;
+    text-shadow: 0 0 6px rgba(160, 200, 255, 0.5);
+  }
+
+    #musicToggle {
+    padding: 8px 18px;
+    font-size: 14px;
+    border-radius: 6px;
+    background: rgba(180, 220, 255, 0.2);
+    border: 1px solid rgba(200, 230, 255, 0.45);
+    color: #e8f6ff;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: 0.25s ease;
+    text-shadow: 0 0 6px rgba(160, 200, 255, 0.6);
+    box-shadow: 0 0 8px rgba(120, 170, 255, 0.35);
+    }
+
+    #musicToggle:hover {
+    background: rgba(200, 240, 255, 0.3);
+    box-shadow:
+        0 0 12px rgba(150, 200, 255, 0.8),
+        0 0 20px rgba(120, 180, 255, 0.4);
+    transform: scale(1.04);
+    }   
+
+</style>
+
+<div id="ui">
+    <label for="flakeCount">number of snowflakes:</label>
+    <input id="flakeCount" type="range" min="1" max="7" value="3" />
+    <span id="flakeValue">3</span>
+    <br><br>
+    <button id="musicToggle">pause</button>
+</div>
+
+<script type="module" src="main.js"></script>
