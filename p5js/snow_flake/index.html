@@ -93,11 +93,29 @@
 </style>
 
 <div id="ui">
+  <nav>
+    <a href="../">back to code art</a>
+    <a href="../../">back to home</a>
+    <a href="../snow_day/index.html">snow day pt1</a>
+  </nav>
+  <br>
     <label for="flakeCount">number of snowflakes:</label>
     <input id="flakeCount" type="range" min="1" max="7" value="3" />
     <span id="flakeValue">3</span>
     <br><br>
     <button id="musicToggle">pause</button>
+    <br><br>
+    <button id="musicToggle"><a href="about/index.html">about this visualizer</a></button>
 </div>
+
+<div id="audioControls" style="position:fixed; bottom:20px; width:100%; text-align:center;">
+    
+    <canvas id="fftCanvas" width="800" height="80" 
+        style="display:block; margin:10px auto; background:#0a0a15;"></canvas>
+
+      <input id="audioSeek" type="range" min="0" max="1" step="0.001" value="0" style="width:60%;">
+
+ </div>
+
 
 <script type="module" src="main.js"></script>

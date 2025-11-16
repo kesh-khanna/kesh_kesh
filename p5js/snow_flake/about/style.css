@@ -1,0 +1,153 @@
+:root {
+    --text: darkslategrey;
+    --border: lightgrey;
+    --accent: rgb(0, 109, 128);
+    --bg: #dce3e1;
+    --gradientTop: white;
+    --gradientBottom: rgb(240, 248, 255, .8);
+}
+
+@font-face {
+    font-family: "DOS"; 
+    src: url('../fonts/Px437_DOS-V_re_ANK24.ttf') format('truetype');
+}
+
+* { 
+    box-sizing: border-box;
+}
+
+body {
+    padding: 15px;
+    font-family: "DOS", "Courier New", Courier, monospace;
+    font-smooth: never;
+    -webkit-font-smoothing: none;
+    -moz-font-smoothing: greyscale;
+    color: var(--text);
+    background: url('../../images/snow_tree_dither.png'); 
+    background-size: 50%;
+}
+
+p {
+    padding: 0 0 10px 0;
+}
+
+.container {
+    max-width: 55rem;
+    margin: 5vw auto 12px auto;
+    outline-offset: 4px;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+    gap: 5px;
+    background-color: var(--gradientBottom);
+}
+
+.small { flex: 0.5 0.1 9%; }
+.large { flex: 1 1 82%; }
+.full { flex: 1 1 100%; }
+
+header {
+    background: linear-gradient(135deg, #e0f0ff 0%, #c8e0f0 100%);
+    width: 100%;
+    height: 100px;
+    border: 2px ridge var(--border);
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header span {
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 2px 2px var(--accent),
+        -1px 1px var(--text);
+    color: var(--gradientTop);
+}
+
+nav {
+    border: 2px ridge var(--border);
+    border-radius: 5px;
+    padding: 5px;
+    background: linear-gradient(var(--gradientTop),var(--gradientBottom));
+}
+
+nav div {
+    text-align: center;
+    font-size: 1.25rem;
+    margin: 5px 5px 10px 5px;
+}
+
+nav a {
+    display: block;
+    margin: 5px;
+    background: linear-gradient(to right,var(--bg),var(--gradientBottom));
+    border-radius: 5px;
+    padding: 2px 7px;
+    text-decoration: none;
+}
+
+nav a:link, nav a:visited { 
+    color: var(--text);
+}
+
+nav a:hover, nav a:focus {
+    background: linear-gradient(to right,var(--bg), var(--gradientBottom), var(--gradientTop));
+    font-style: italic;
+}
+
+section {
+    border: 2px ridge var(--border);
+    border-radius: 5px;
+    background: linear-gradient(var(--gradientTop),var(--gradientBottom));
+    padding: 10px;
+}
+
+footer {
+    text-align: center;
+    margin-bottom: 5vw;
+    font-size: 0.8rem;
+    background-color: rgba(240, 248, 255, .8);
+    width: fit-content;
+    margin: auto;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+h1, h2, h3, h4, p { 
+    margin: 5px;
+    line-height: 1.4;
+}
+
+h1 { 
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    font-weight: normal;
+    text-align: center;
+}
+
+h2 { 
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 10px;
+    color: var(--accent);
+}
+
+img { max-width: 100%; }
+
+a:hover, a:focus {
+    font-style: italic;
+}
+
+ul {
+    margin-left: 20px;
+    line-height: 1.6;
+}
+
+code {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 2px 6px;
+    border-radius: 3px;
+}

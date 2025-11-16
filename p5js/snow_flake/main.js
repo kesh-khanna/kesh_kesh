@@ -14,6 +14,10 @@ camera.position.set(0, 1.5, 10);
 const slider = document.getElementById("flakeCount");
 const flakeValue = document.getElementById("flakeValue");
 
+const seekSlider = document.getElementById("audioSeek");
+const fftCanvas = document.getElementById("fftCanvas");
+const fftCtx = fftCanvas.getContext("2d");
+
 
 new OrbitControls(camera, renderer.domElement);
 
@@ -33,35 +37,28 @@ point.position.set(2, 2, 2);
 scene.add(point);
 
 function createSnowflake(i, totalSnowFlakes = 3) {
+
     const t = i / totalSnowFlakes;
     const branch = new THREE.Shape();
-
     branch.moveTo(0, 0);
-    branch.lineTo(0.3, 1.0 + t);
+    branch.lineTo(0.3 - 0.1 * t, 1.0 - t);
     branch.lineTo(0.15, 1.1 + t);
-    branch.lineTo(0, 1.0);
-    branch.lineTo(-0.15, 1.1 - t);
-    branch.lineTo(-0.3, 1.0 + t);
+    branch.lineTo(0, 1.0 - t);
+    branch.lineTo(-0.15, 1.1 + t);
+    branch.lineTo(-0.3 + 0.1 * t, 1.0 - t);
     branch.closePath();
 
-    const extrude = {
-        depth: 0.1 * t - 0.15,
-        bevelEnabled: false
-    };
+    const extrude = { depth: 0.1 * t - 0.15, bevelEnabled: false };
 
-    const geom = new THREE.ExtrudeGeometry(branch, extrude);
-    const g = new THREE.Group();
-
+    const geom = new THREE.ExtrudeGeometry(branch, extrude); const g = new THREE.Group();
     let min_branches = 5;
     for (let j = 0; j < (min_branches + i); j++) {
         const mesh = new THREE.Mesh(geom);
         mesh.rotation.z = (Math.PI * 2 * j) / (min_branches + i);
         g.add(mesh);
     }
-
     return g;
 }
-
 const snowflakes = [];
 
 function updateSnowflakes(count) {
@@ -71,13 +68,13 @@ function updateSnowflakes(count) {
 }
 
 function createAddFlakes(totalSnowFlakes = 3) {
-    const spacing = 3;
+    const spacing = 3.5;
 
-    const colorLow = new THREE.Color(0x3344ff);      
-    const colorHigh = new THREE.Color(0xffffff);    
+    const colorLow  = new THREE.Color(0xff0000);  // red
+    const colorHigh = new THREE.Color(0x3366ff); 
 
-    const emissiveLow = new THREE.Color(0x332211);  
-    const emissiveHigh = new THREE.Color(0x88ccff); 
+    const emissiveLow = new THREE.Color(0x332211);
+    const emissiveHigh = new THREE.Color(0x88ccff);
 
     const metalnessLow = 0.1;
     const metalnessHigh = 0.8;
@@ -109,8 +106,13 @@ function createAddFlakes(totalSnowFlakes = 3) {
                     metalness: metalness,
                     roughness: roughness
                 });
+                // get the original static color for animation
+                obj.material.userData.originalColor = obj.material.color.clone();
+                obj.material.userData.originalEmissive = obj.material.emissive.clone();
             }
         });
+
+        
     }
 }
 
@@ -146,6 +148,47 @@ musicButton.addEventListener("click", () => {
     }
 });
 
+// update scrubber position as song plays
+if (sound.buffer && sound.isPlaying) {
+    seekSlider.value = sound.context.currentTime / sound.buffer.duration;
+}
+
+seekSlider.addEventListener("input", () => {
+    if (!sound.buffer) return;
+
+    const targetTime = seekSlider.value * sound.buffer.duration;
+
+    // jump in audio
+    sound.offset = targetTime;
+    
+    if (sound.isPlaying) {
+        sound.stop();
+        sound.play(sound.offset);
+    }
+});
+
+
+// get the frequencies that each flake should react too
+function getBinRangeForFlake(flakeIndex, totalFlakes, fftSize) {
+    const binsPerFlake = Math.floor(fftSize / totalFlakes);
+    const start = flakeIndex * binsPerFlake;
+    const end = (flakeIndex === totalFlakes - 1)
+        ? fftSize - 1                      // last flake gets leftovers
+        : start + binsPerFlake;
+
+    return [start, end];
+}
+
+// get energy amplitude only from that frequency range
+function getFlakeEnergy(analyser, start, end) {
+    const data = analyser.getFrequencyData();
+    let sum = 0;
+
+    for (let i = start; i < end; i++) sum += data[i];
+
+    return sum / (end - start); // average
+}
+
 let pixelSnow;
 
 function createPixelSnow(count = 500) {
@@ -174,52 +217,99 @@ function createPixelSnow(count = 500) {
 
 createPixelSnow(1500);
 
+function drawFFT() {
+    const data = analyser.getFrequencyData();
+    const count = data.length;
 
+    fftCtx.clearRect(0, 0, fftCanvas.width, fftCanvas.height);
+
+    const barWidth = fftCanvas.width / count;
+
+    for (let i = 0; i < count; i++) {
+        const v = data[i] / 256;
+        const barHeight = v * fftCanvas.height;
+
+        fftCtx.fillStyle = `rgb(${v * 255}, ${50}, ${255 - v * 255})`;
+        fftCtx.fillRect(i * barWidth, fftCanvas.height - barHeight, barWidth - 1, barHeight);
+    }
+}
+
+// energy is too spiky so we want to smooth
+const smoothedEnergy = [];
 function animate() {
     requestAnimationFrame(animate);
 
-    for (const flake of snowflakes) {
+    for (let index = 0; index < snowflakes.length; index++) {
+        const flake = snowflakes[index];
+        const total = snowflakes.length;
+
+        // frequency range assigned to this flake
+        const [start, end] = getBinRangeForFlake(index, total, analyser.analyser.frequencyBinCount);
+        const energy_frame = getFlakeEnergy(analyser, start, end) / 256;
+
+        // smooth out the engery a bit
+        if (smoothedEnergy[index] === undefined) smoothedEnergy[index] = 0;
+        const smoothFactor = 0.25;
+        smoothedEnergy[index] =
+            smoothedEnergy[index] * (1 - smoothFactor) + energy_frame * smoothFactor;
+
+        const energy = smoothedEnergy[index];
+
+        const t = total > 1 ? index / (total - 1) : 0;
+
+        // main geometric animation
+        flake.scale.setScalar(0.8 + energy * 1.2);
+        flake.rotation.z += 0.002 + 0.002 * t;
+
+        // apply audio-reactive color changes
         flake.traverse(obj => {
-            if (obj.isMesh) {
-                const tAnim = performance.now() * 0.0008;
-                obj.material.metalness = 0.4 + Math.sin(tAnim) * 0.2;
-                obj.material.roughness = 0.2 + Math.cos(tAnim) * 0.1;
-            }
+        if (!obj.isMesh) return;
+
+            const mat = obj.material;
+            const originalColor = mat.userData.originalColor;
+            const originalEmissive = mat.userData.originalEmissive;
+
+            // Red → Blue gradient based on energy
+            const low = new THREE.Color(0xff0000);
+            const high = new THREE.Color(0x3366ff);
+            const reactiveColor = low.clone().lerp(high, energy);
+
+            // Blend original color with reactive color
+            const colorBlend = 0.5 * energy;   // how “strong” the audio tint is
+            mat.color.copy(originalColor).lerp(reactiveColor, colorBlend);
+
+            // Emissive glow fades back naturally
+            const emissiveBoost = energy * 1.5;
+            mat.emissive.copy(originalEmissive).multiplyScalar(1 + emissiveBoost);
+
+            mat.needsUpdate = true;
         });
-
-        const index = snowflakes.indexOf(flake);
-        const t = snowflakes.length > 1 ? index / (snowflakes.length - 1) : 0;
-
-        const level = analyser.getAverageFrequency() / 256;
-        flake.scale.setScalar(0.8 + level * 0.5);
-        // Slightly vary rotation speed using t
-        flake.rotation.z += 0.002 + level * 0.02 + 0.002 * t;
     }
 
-        
-    if (pixelSnow) {
-        const positions = pixelSnow.geometry.attributes.position.array;
-        for (let i = 1; i < positions.length; i += 3) {
-            positions[i] -= 0.01; 
 
-            if (positions[i] < -5) {
-                positions[i] = 20;
-                positions[i - 2] = (Math.random() - 0.5) * 50; 
-                positions[i - 1] = 20;                           
-                positions[i] = 20;                              
+        if (pixelSnow) {
+            const positions = pixelSnow.geometry.attributes.position.array;
+            for (let i = 1; i < positions.length; i += 3) {
+                positions[i] -= 0.01;
+
+                if (positions[i] < -5) {
+                    positions[i] = 20;
+                    positions[i - 2] = (Math.random() - 0.5) * 50;
+                    positions[i - 1] = 20;
+                    positions[i] = 20;
+                }
             }
+            pixelSnow.geometry.attributes.position.needsUpdate = true;
         }
-        pixelSnow.geometry.attributes.position.needsUpdate = true;
+        drawFFT();
+        renderer.render(scene, camera);
     }
 
-    renderer.render(scene, camera);
-}
 
+    animate();
 
-animate();
-
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-});
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
