@@ -125,7 +125,7 @@ const sound = new THREE.Audio(listener);
 
 const audioLoader = new THREE.AudioLoader();
 audioLoader.load(
-    "../audio/snow_day.mp3",
+    "../audio/dubby_min.mp3",
     buffer => {
         sound.setBuffer(buffer);
         sound.setLoop(true);

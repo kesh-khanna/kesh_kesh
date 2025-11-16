@@ -2,9 +2,9 @@
 <html>
 
 <link href="style.css" rel="stylesheet" type="text/css" media="all">
-
+<script src="//toolness.github.io/p5.js-widget/p5-widget.js"></script>
 <head>
-    <title>About Snow Visualizer - kesh kesh</title>
+    <title>about snow visualizer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     
@@ -27,21 +27,101 @@
         <section class="large">
             <h1>snow audio visualizer</h1>
             <p>
+                that was a quick spectrum visualizer made up of snowflakes.
             </p>
-            
-            <h2>features & technology</h2>
-            <ul>
-                <li>[Feature or technology detail]</li>
-              
-            </ul>
-            
-            <h2>how it works</h2>
+            <h2>audio reactivity</h2>
             <p>
+                depending on the number of snowflakes chosen the frequency range of the song is binned evenly such that each snowflake represents a frequency range.
+                the flakes on the left are intended to a bit blockier and darker in color and material. these rightmost flakes capture the low end of the song, pulsing with each kick.
+                flakes on the right are intended to be thinner, shinier, and lighter in color. these represent the high end of the song, pulsing with the high hats.
+                <br><br>these visual properties of each flake are also evenly spaced into a gradient depending on the number of flakes chosen.
             </p>
-            
-            <h2>tips</h2>
+                
+            <h2>falling snow</h2>
             <p>
+                the falling snow is randomly generated at the start of the animation, and slowly falls (moves down the screen) until it hits the bottom, at which point it is teleported back to the top of the screen to fall again.
+                currently there are 1000 snow particles on the screen. i may add that as a parameter that the user can select at some point.
             </p>
+                
+            <h2>recursion</h2>
+            <p>
+                i would love to add some kind of recursion to this 3D snowflake model to try and get closer to a "fractal" kind of design.
+                this would also be closer to how real snowflakes look and form.
+                <br><br>
+                below is a bit of javascript to generate a recursive 2D snowflake using p5js. the code continuously adds smaller branches as it goes depending on the parameters you choose.
+            </p>
+            <p>
+                <br>
+                <b>try changing some of these parameters in the code window below and to the left</b>
+                <h4>orders</h4> increases the number of recursive branches. try a larger number like 12. it really starts to make things look like fractals
+                <br><br>
+                <h4>branch_angle</h4> determines the angle that each successive branch will be drawn.
+                try a sharper angle like 55, and a shallower angle like 25
+                <br><br>
+                <h4>branches</h4> determines how many main branches are present in the snowflake
+                <br><br>
+                <h4>newLenRatio</h4> determines where on each branch the smaller branches are started from. 
+                try 0.25 for longer branches and 0.75 for shorter (maybe i should invert this for clarity)
+            </p>
+            <script type="text/p5"  data-autoplay data-preview-width="400" data-height="600">
+
+// hyper parameters (try changing these)
+
+// orders increases the number of recursive branches
+// try a larger number like 12
+let orders = 2;
+// branch_angle determines which angles (-branch_angle, branch_angle)
+// each successive branch will be drawn at.
+// try a sharper angle like 55, and a shallower angle like 25
+let branch_angle = 35;
+// branches determines how many main branches are present in the snowflake
+let branches = 6;
+// newLenRatio determines where on each branch the smaller branches are started from. 
+// try 0.25 and 0.75
+let newLenRatio = 0.5;
+
+
+
+// main functions
+function setup() {
+createCanvas(500, 500);
+background(200);
+
+translate(width / 2, height / 2);
+
+for (let i = 0; i < branches; i++) {
+        push();
+        rotate((TWO_PI / branches) * i);
+        drawBranch(100, orders); 
+        pop();
+    }
+}
+
+function drawBranch(len, order) {
+line(0, 0, 0, -len);
+translate(0, -len);
+
+// base condition
+    if (order > 0) {
+        let newLen = len * newLenRatio; 
+        let angle = PI / (180 / branch_angle); 
+    
+        // left side
+        push();
+        rotate(-angle);
+        // when we call we subtract one from the order so we hit our base condition
+        drawBranch(newLen, order - 1);
+        pop();
+        
+        // right side
+        push();
+        rotate(angle);
+        drawBranch(newLen, order - 1);
+        pop();
+    }
+}
+
+            </script>
         </section>
     </div>
     
