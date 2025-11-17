@@ -173,10 +173,6 @@ const commands = {
 const user = 'kesh';
 const server = 'kesh.org';
 
-// $.terminal.xml_formatter.tags.green = () => {
-//     return `[[;#44D544;]`;
-// };
-
 function prompt() {
     return `<green>${user}@${server}</green>:<blue>${cwd}</blue>$ `;
 }
