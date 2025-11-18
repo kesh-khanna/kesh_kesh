@@ -1,0 +1,157 @@
+<div id="app"></div>
+
+<script type="importmap">
+    {
+    "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.164/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164/examples/jsm/"
+      }
+    }
+</script>
+
+<style>
+
+  @font-face {
+    font-family: "DOS"; 
+    src: url('fonts\Px437_DOS-V_re_ANK24.ttf') format('truetype');
+  }
+
+  :root{
+    --text: darkslategrey;
+    --border: lightgrey;
+    --accent: rgb(0, 109, 128);
+    --bg: #dce3e1;
+    --gradientTop: white;
+    --gradientBottom: rgba(240, 248, 255, .8);
+  }
+
+  #ui {
+    font-family: "DOS", "Courier New", Courier, monospace;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 12px 16px;
+    background: var(--gradientBottom);
+    border: 2px ridge var(--border);
+    border-radius: 6px;
+    font-family: inherit;
+    color: var(--text);
+    max-width: 240px;
+    z-index: 20;
+  }
+
+  #ui nav {
+    padding: 0;
+    margin-bottom: 10px;
+    background: none;
+  }
+
+  #ui nav a {
+    display: block;
+    margin: 4px 0;
+    padding: 3px 6px;
+    border-radius: 4px;
+    background: linear-gradient(var(--gradientTop), var(--gradientBottom));
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+
+  #ui nav a:link, nav a:visited { 
+	color: var(--text);
+  }
+
+  #ui nav a:hover, nav a:focus {
+    background: linear-gradient(to right,var(--bg), var(--gradientBottom), var(--gradientTop));
+    font-style: italic;
+
+  }
+
+  #ui label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+  }
+
+  #flakeCount {
+    width: 100%;
+  }
+
+  #flakeValue {
+    font-size: 0.9rem;
+    margin-left: 6px;
+    color: var(--text);
+  }
+
+  .musicToggle {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    background: linear-gradient(var(--gradientTop), var(--gradientBottom));
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .musicToggle:hover {
+    background: var(--bg);
+  }
+
+  .navButton {
+    display: block;
+    text-align: center;
+    margin: 4px 0;
+    padding: 4px 8px;
+    border-radius: 5px;
+    background: linear-gradient(var(--gradientTop), var(--gradientBottom));
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  .navButton:hover {
+    background: var(--bg);
+  }
+
+  input[type=range] {
+  cursor: pointer;
+}
+
+</style>
+
+<div id="ui">
+  <nav>
+    <a href="../">back to code art</a>
+    <a href="../../">back to home</a>
+    <a href="../snow_day/index.html">snow day pt1</a>
+  </nav>
+
+  <br>
+
+  <label for="flakeCount">number of snowflakes:</label>
+  <input id="flakeCount" type="range" min="1" max="7" value="3" />
+  <span id="flakeValue">3</span>
+
+  <br><br>
+
+  <button id="musicToggle" class="musicToggle">pause</button>
+
+  <br><br>
+  <a class="navButton" href="about/index.html">about this visualizer</a>
+</div>
+
+<div id="audioControls"
+  style="position:fixed; bottom:20px; width:100%; text-align:center;">
+
+  <canvas id="fftCanvas" width="800" height="80"
+    style="display:block; margin:10px auto; background:#0a0a15;"></canvas>
+
+  <input id="audioSeek" type="range" min="0" max="1" step="0.001" value="0"
+    style="width:60%;">
+
+</div>
+
+<script type="module" src="main.js"></script>

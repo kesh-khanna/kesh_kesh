@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery.terminal/css/jquery.terminal.min.css"/>
+<link href="style.css" rel="stylesheet" type="text/css" media="all">
+
+</head>
+<body>
+<button id="help-button">i dont want to deal with this nonsense... just show me the art</button>
+
+<div id="simple-nav">
+    <h1>art / music coding projects</h1>
+    <ul class="project-list">
+        <li>
+            <a href="snow_day/index.html">
+                <strong>snow_day</strong>
+                <div class="description">audio reactive visualizer that i made for a little guitar jam. 11/12/25. my first attempt at working more in depth with <a href="https://p5js.org/" onclick="event.stopPropagation();" target="_blank">p5js</a></div>
+            </a>
+        </li>
+         <li>
+            <a href="snow_flake/index.html">
+                <strong>snow_flake</strong>
+                <div class="description">another attempt at an audio reactive visualizer. sticking with the snow theme. my first attempt at workign with <a href="https://threejs.org/" onclick="event.stopPropagation();" target="_blank">three.js</a>. 11/15/25</div>
+            </a>
+        </li>
+        <li>
+            <a href="sorting/index.html">
+                <strong>pixel_sorting</strong>
+                <div class="description">under construction. the goal is to make something that sorts the pixels in an image and animates the sorting process in some way</div>
+            </a>
+        </li>
+    </ul>
+    <button class="back-button" onclick="toggleSimpleNav()">back to terminal</button>
+    <button class="back-button" onclick="window.location.href='../index.html'" style="margin-left: 10px;">back to home</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/jquery.terminal.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/figlet/lib/figlet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/isomorphic-lolcat"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/xml_formatting.js"></script>
+<script>
+    function toggleSimpleNav() {
+        const simpleNav = document.getElementById('simple-nav');
+        const helpButton = document.getElementById('help-button');
+        
+        if (simpleNav.classList.contains('active')) {
+            simpleNav.classList.remove('active');
+            helpButton.style.display = 'block';
+        } else {
+            simpleNav.classList.add('active');
+            helpButton.style.display = 'none';
+        }
+    }
+    
+    document.getElementById('help-button').addEventListener('click', toggleSimpleNav);
+</script>
+<script src="my-terminal.js"></script>
+</body>
+</html>
