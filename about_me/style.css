@@ -142,7 +142,7 @@ nav a:focus {
 	background: linear-gradient(to right, rgba(167,205,230,0.9), var(--gradientBottom), var(--gradientTop));
 }
 
-/* optional button styling like in the preview */
+
 div.small>img {
 	display: block;
 	margin: 5px auto;
@@ -155,7 +155,7 @@ section {
 	border: 2px ridge var(--border);
 	border-radius: 5px;
 	background: linear-gradient(var(--gradientTop), var(--gradientBottom));
-	padding: 5px;
+	padding: 15px;
 }
 
 
@@ -253,3 +253,5 @@ a:visited {
 .imgtxt:focus img {
 	rotate: -8deg;
 }
+
+ol.e {list-style-type: lower-roman;}
